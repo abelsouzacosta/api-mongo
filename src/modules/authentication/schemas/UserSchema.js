@@ -1,4 +1,6 @@
 const mongoose = require("../../../shared/http/db");
+const bcrypt = require("bcryptjs");
+const SALT_WORK_FACTOR = 10; /// salt to bcrypt
 
 /**
  * Define os campos que teremos dentro de um documento
@@ -24,6 +26,21 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+});
+
+UserSchema.pre("save", async function save(next) {
+  if (!this.isModified("password")) return next();
+
+  try {
+    const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+    const hash = await bcrypt.hash(this.password, salt);
+
+    this.password = hash;
+
+    return next();
+  } catch (error) {
+    return next(error);
+  }
 });
 
 module.exports = UserSchema;
