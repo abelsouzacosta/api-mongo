@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("../../../shared/http/db");
 
 /**
  * Define os campos que teremos dentro de um documento
