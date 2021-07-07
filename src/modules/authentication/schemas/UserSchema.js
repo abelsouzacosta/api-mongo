@@ -1,6 +1,4 @@
 const mongoose = require("../../../shared/http/db");
-const bcrypt = require("bcryptjs");
-const SALT_WORK_FACTOR = 10; /// salt to bcrypt
 
 /**
  * Define os campos que teremos dentro de um documento
@@ -42,9 +40,5 @@ UserSchema.pre("save", async function save(next) {
     return next(error);
   }
 });
-
-UserSchema.methods.comparePassword = async function comparePassword(password) {
-  return bcrypt.compare(password, this.password);
-};
 
 module.exports = UserSchema;
