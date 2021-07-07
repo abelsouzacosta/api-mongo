@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 exports.execute = async ({ email, password }) => {
   const user = await User.findOne({ email }).select("+password");
@@ -10,8 +12,21 @@ exports.execute = async ({ email, password }) => {
 
   if (!passwordCorrect) throw new Error("Password incorrect");
 
-  // retira a senha do objeto que vai ser retornado
   user.password = undefined;
 
-  return user;
+  // gera o token jwt
+  // tempo e expiração de 1 dia
+  const token = jwt.sign(
+    {
+      id: user.id,
+    },
+    process.env.HASH,
+    {
+      expiresIn: 86400,
+    }
+  );
+
+  // retira a senha do objeto que vai ser retornado
+
+  return [user, token];
 };
