@@ -12,7 +12,7 @@ const jwt = require("jsonwebtoken");
  */
 module.exports = (req, res, next) => {
   // captures the authetication header
-  const authenticationHeader = req.headers.authetication;
+  const authenticationHeader = req.headers.authorization;
 
   // verifies if there is an authetication header
   if (!authenticationHeader)
