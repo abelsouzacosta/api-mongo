@@ -1,5 +1,6 @@
 const list = require("../services/ListUsersService");
 const update = require("../services/UpdateUserService");
+const delete_service = require("../services/DeleteUserService");
 
 exports.index = async (req, res) => {
   try {
@@ -23,6 +24,20 @@ exports.update = async (req, res) => {
     return res.status(200).json({
       user,
     });
+  } catch (error) {
+    return res.status(400).json({
+      error: `${error}`,
+    });
+  }
+};
+
+exports.delete_user = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await delete_service.execute({ id });
+
+    return res.status(200).json(!!user);
   } catch (error) {
     return res.status(400).json({
       error: `${error}`,

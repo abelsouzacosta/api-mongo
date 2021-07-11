@@ -12,4 +12,6 @@ router.get("/", isAuthenticated, userController.index);
 
 router.put("/update", isAuthenticated, userController.update);
 
+router.delete("/delete/:id", userController.delete_user);
+
 module.exports = router;
