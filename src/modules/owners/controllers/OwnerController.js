@@ -1,5 +1,6 @@
 const CreateOwnerService = require("../services/CreateOwnerService");
 const ListOwnersService = require("../services/ListOwnersService");
+const DetailsOwnerService = require("../services/DetailsOwnerService");
 
 exports.index = async (req, res) => {
   try {
@@ -18,6 +19,20 @@ exports.create = async (req, res) => {
 
   try {
     const owner = await CreateOwnerService.execute({ name, sex, cpf });
+
+    return res.status(200).json(owner);
+  } catch (error) {
+    return res.status(400).json({
+      error: `${error}`,
+    });
+  }
+};
+
+exports.details = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const owner = await DetailsOwnerService.execute({ id });
 
     return res.status(200).json(owner);
   } catch (error) {
