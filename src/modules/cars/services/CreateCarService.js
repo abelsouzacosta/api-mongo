@@ -10,7 +10,9 @@ exports.execute = async ({ brand, model, color, fab, owner }) => {
 
   if (!carOwner) throw new Error("No Owner were found");
 
-  carOwner.cars += car;
+  carOwner.cars.push(car);
+
+  carOwner.save();
 
   return car;
 };

@@ -14,10 +14,12 @@ const OwnerSchema = new mongoose.Schema({
     type: String,
     requierd: true,
   },
-  cars: {
-    type: mongoose.Types.ObjectId,
-    refs: "Car",
-  },
+  cars: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      refs: "Car",
+    },
+  ],
 });
 
 module.exports = OwnerSchema;
