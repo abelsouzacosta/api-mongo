@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const authenticationRouter = require("../../../modules/authentication/routes/");
-const patientRouter = require("../../../modules/patient/routes/");
+const carRouter = require("../../../modules/car/routes/");
 
 router.get("/", (req, res) => {
   res.status(200).json({
@@ -11,6 +11,6 @@ router.get("/", (req, res) => {
 
 router.use("/authenticate", authenticationRouter);
 
-router.use("/patient", patientRouter);
+router.use("/cars", carRouter);
 
 module.exports = router;
