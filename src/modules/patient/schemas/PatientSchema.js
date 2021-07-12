@@ -1,18 +1,18 @@
 const mongoose = require("../../../shared/http/db");
 
-const AddressSchema = new mongoose.Schema({
-  street: {
+const PatientSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true,
   },
-  number: {
-    type: Number,
+  dateOfBirth: {
+    type: Date,
     required: true,
   },
-  patient: {
+  address: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Patient",
+    ref: "Address",
   },
 });
 
-module.exports = AddressSchema;
+module.exports = PatientSchema;
