@@ -3,6 +3,8 @@ const controller = require("../controllers/CarController");
 
 router.get("/", controller.index);
 
+router.get("/details/:id", controller.details);
+
 router.post("/", controller.create);
 
 router.put("/update/:id", controller.update);

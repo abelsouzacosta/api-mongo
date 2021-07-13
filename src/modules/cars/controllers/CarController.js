@@ -2,6 +2,7 @@ const CreateCarService = require("../services/CreateCarService");
 const ListCarsService = require("../services/ListCarsService");
 const DeleteCarService = require("../services/DeleteCarService");
 const UpdateCarService = require("../services/UpdateCarService");
+const DetailsCarService = require("../services/DetailsCarService");
 
 exports.index = async (req, res) => {
   const cars = await ListCarsService.execute();
@@ -59,6 +60,20 @@ exports.update = async (req, res) => {
     return res.status(200).json(car);
   } catch (error) {
     return res.status(401).json({
+      error: `${error}`,
+    });
+  }
+};
+
+exports.details = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const car = await DetailsCarService.execute({ id });
+
+    return res.status(200).json(car);
+  } catch (error) {
+    return res.status(400).json({
       error: `${error}`,
     });
   }
