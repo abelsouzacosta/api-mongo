@@ -7,4 +7,6 @@ router.get("/", controller.index);
 
 router.get("/details/:id", controller.details);
 
+router.put("/update/:id", controller.update);
+
 module.exports = router;

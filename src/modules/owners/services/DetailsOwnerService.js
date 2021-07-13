@@ -1,9 +1,10 @@
 const Owner = require("../models/Owner");
+const Car = require("../../cars/models/Car");
 
 exports.execute = async ({ id }) => {
-  const owner = await Owner.findById(id);
+  const car = await Car.find().where("owner").equals(id).populate("owner");
 
-  if (!owner) throw new Error("No owner found");
+  if (!car) throw new Error("Nothing was found");
 
-  return owner;
+  return car;
 };
