@@ -9,4 +9,6 @@ router.get("/details/:id", controller.details);
 
 router.put("/update/:id", controller.update);
 
+router.delete("/delete/:id", controller.delete_owner);
+
 module.exports = router;

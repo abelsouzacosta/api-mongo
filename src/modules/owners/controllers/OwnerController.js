@@ -2,6 +2,7 @@ const CreateOwnerService = require("../services/CreateOwnerService");
 const ListOwnersService = require("../services/ListOwnersService");
 const DetailsOwnerService = require("../services/DetailsOwnerService");
 const UpdateOwnerService = require("../services/UpdateOwnerService");
+const DeleteOwnerService = require("../services/DeleteOwnerService");
 
 exports.index = async (req, res) => {
   try {
@@ -51,6 +52,20 @@ exports.update = async (req, res) => {
     const owner = await UpdateOwnerService.execute({ id, name, sex, cpf });
 
     return res.status(200).json(owner);
+  } catch (error) {
+    return res.status(400).json({
+      error: `${error}`,
+    });
+  }
+};
+
+exports.delete_owner = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const delete_user = await DeleteOwnerService.execute({ id });
+
+    return res.status(200).json(delete_user);
   } catch (error) {
     return res.status(400).json({
       error: `${error}`,
